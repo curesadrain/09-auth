@@ -2,7 +2,7 @@
 
 import css from './Notes.module.css';
 import NoteList from '@/components/NoteList/NoteList';
-import { FetchNotes } from '@/lib/api';
+import { FetchNotes } from '@/lib/api/clientApi';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import Pagination from '@/components/Pagination/Pagination';
 import { useEffect, useState } from 'react';

@@ -3,7 +3,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { FetchNoteById } from '@/lib/api';
+import { FetchNoteByIdServer } from '@/lib/api/serverApi';
 import NotePreviewClient from './NotePreview.client';
 
 type Props = {
@@ -16,7 +16,7 @@ async function NotePreview({ params }: Props) {
 
   await queryClient.prefetchQuery({
     queryKey: ['note', id],
-    queryFn: () => FetchNoteById(id),
+    queryFn: () => FetchNoteByIdServer(id),
   });
 
   return (
