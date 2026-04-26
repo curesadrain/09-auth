@@ -13,12 +13,17 @@ function EditProfilePage() {
   const router = useRouter();
 
   const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
   const handleSubmit = async (formData: FormData) => {
     try {
       const formValues = Object.fromEntries(formData) as { username: string };
       const newUsername = formValues.username;
       if (user && newUsername.trim() !== '') {
-        await UpdateMe({ username: newUsername, email: user?.email });
+        const updatedUser = await UpdateMe({
+          username: newUsername,
+          email: user?.email,
+        });
+        setUser(updatedUser);
         router.push('/profile');
       } else {
         toast.error('Input your new username');

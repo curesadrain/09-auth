@@ -1,5 +1,5 @@
 import { api } from '@/app/api/api';
-import { FetchNotesResponse, NextServer } from './api';
+import { FetchNotesResponse } from './api';
 import { Note } from '@/types/note';
 import { User } from '@/types/user';
 import { cookies } from 'next/headers';
@@ -39,7 +39,7 @@ export const FetchNoteByIdServer = async (id: string): Promise<Note> => {
 export const CheckSessionServer = async () => {
   const cookieStore = await cookies();
   const allCookies = cookieStore.toString();
-  const res = await NextServer.get<CheckSessionRequest>('/auth/session', {
+  const res = await api.get<CheckSessionRequest>('/auth/session', {
     headers: {
       Cookie: allCookies,
     },
@@ -50,7 +50,7 @@ export const CheckSessionServer = async () => {
 export const GetMeServer = async () => {
   const cookieStore = await cookies();
   const allCookies = cookieStore.toString();
-  const { data } = await NextServer.get<User>('/users/me', {
+  const { data } = await api.get<User>('/users/me', {
     headers: {
       Cookie: allCookies,
     },

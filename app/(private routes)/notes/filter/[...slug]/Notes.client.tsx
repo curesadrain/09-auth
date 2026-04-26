@@ -6,11 +6,11 @@ import { FetchNotes } from '@/lib/api/clientApi';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import Pagination from '@/components/Pagination/Pagination';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import { useDebouncedCallback } from 'use-debounce';
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from '@/components/Loader/Loader';
+import Link from 'next/link';
 
 interface SidebarNotesClientProps {
   initialQuery: string;
@@ -73,12 +73,6 @@ function SidebarNotesClient({
 
   const showLoader = isLoading || (isFetching && !isPlaceholderData);
 
-  const router = useRouter();
-
-  const handleCreateNote = () => {
-    router.push('/notes/action/create');
-  };
-
   return (
     <div className={css.app}>
       <Toaster />
@@ -92,9 +86,13 @@ function SidebarNotesClient({
             onPageChange={setCurrentPage}
           />
         )}
-        <button className={css.button} onClick={handleCreateNote}>
+        <Link
+          href="/notes/action/create"
+          className={css.button}
+          // onClick={handleCreateNote}
+        >
           Create note +
-        </button>
+        </Link>
       </header>
       {data.notes.length > 0 && <NoteList notes={data.notes} />}
     </div>

@@ -57,7 +57,7 @@ export type CheckSessionRequest = {
 };
 export const CheckSession = async () => {
   const res = await NextServer.get<CheckSessionRequest>('/auth/session');
-  return res.data.success;
+  return res.data;
 };
 
 export const GetMe = async () => {
@@ -71,5 +71,5 @@ export type UpdateRequest = {
 };
 export const UpdateMe = async (data: UpdateRequest) => {
   const res = await NextServer.patch<User>('/users/me', data);
-  return res.data.username;
+  return res.data;
 };
